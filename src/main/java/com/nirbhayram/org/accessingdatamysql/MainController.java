@@ -3,11 +3,9 @@ package com.nirbhayram.org.accessingdatamysql;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path="/demo") // This means URL's start with /demo (after Application path)
@@ -27,6 +25,15 @@ public class MainController {
     n.setEmail(email);
     userRepository.save(n);
     return "Saved";
+  }
+
+  @GetMapping(path="/user/{id}")
+  public @ResponseBody User getUserById(@PathVariable int id){
+    Optional<User> optional = userRepository.findById(id);
+    if (!optional.isEmpty()){
+      return optional.get();
+    }
+    return null;
   }
 
   @GetMapping(path="/all")
