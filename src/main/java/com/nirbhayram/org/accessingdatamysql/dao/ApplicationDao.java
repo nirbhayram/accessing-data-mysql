@@ -1,28 +1,29 @@
 package com.nirbhayram.org.accessingdatamysql.dao;
 
 import com.nirbhayram.org.accessingdatamysql.entity.Application;
+import com.nirbhayram.org.accessingdatamysql.entity.ApplicationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 @Repository
 public class ApplicationDao implements IApplicationDao{
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Autowired
+    private ApplicationRepository applicationRepository;
 
     @Override
     public void addApplication(Application application) {
-        entityManager.persist(application);
+        applicationRepository.save(application);
     }
 
     @Override
     public boolean applicationExists(String name, String owner) {
-        String jql = "from Application as a WHERE a.name = ? and a.owner = ?";
-        int result_count = entityManager.createQuery(jql).setParameter(0,name).setParameter(1   ,owner).getResultList().size();
-        return result_count>0;
+        List<Application> applicationsList = applicationRepository.findByNameAndOwner(name,owner);
+        return applicationsList.size()>0;
     }
 }
