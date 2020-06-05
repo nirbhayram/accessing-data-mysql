@@ -1,4 +1,4 @@
-package com.nirbhayram.org.accessingdatamysql.entity;
+package com.nirbhayram.org.accessingdatamysql.entity.user;
 
 
 import javax.persistence.*;

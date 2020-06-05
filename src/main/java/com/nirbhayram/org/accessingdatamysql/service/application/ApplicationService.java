@@ -1,7 +1,7 @@
-package com.nirbhayram.org.accessingdatamysql.service;
+package com.nirbhayram.org.accessingdatamysql.service.application;
 
-import com.nirbhayram.org.accessingdatamysql.dao.IApplicationDao;
-import com.nirbhayram.org.accessingdatamysql.entity.Application;
+import com.nirbhayram.org.accessingdatamysql.dao.application.IApplicationDao;
+import com.nirbhayram.org.accessingdatamysql.entity.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

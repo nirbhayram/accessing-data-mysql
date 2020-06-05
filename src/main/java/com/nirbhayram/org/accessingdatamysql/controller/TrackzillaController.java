@@ -1,7 +1,7 @@
 package com.nirbhayram.org.accessingdatamysql.controller;
 
-import com.nirbhayram.org.accessingdatamysql.entity.Application;
-import com.nirbhayram.org.accessingdatamysql.service.IApplicationService;
+import com.nirbhayram.org.accessingdatamysql.entity.application.Application;
+import com.nirbhayram.org.accessingdatamysql.service.application.IApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

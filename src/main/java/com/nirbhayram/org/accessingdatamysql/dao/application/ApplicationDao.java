@@ -1,11 +1,10 @@
-package com.nirbhayram.org.accessingdatamysql.dao;
+package com.nirbhayram.org.accessingdatamysql.dao.application;
 
-import com.nirbhayram.org.accessingdatamysql.entity.Application;
-import com.nirbhayram.org.accessingdatamysql.entity.ApplicationRepository;
+import com.nirbhayram.org.accessingdatamysql.entity.application.Application;
+import com.nirbhayram.org.accessingdatamysql.entity.application.ApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 

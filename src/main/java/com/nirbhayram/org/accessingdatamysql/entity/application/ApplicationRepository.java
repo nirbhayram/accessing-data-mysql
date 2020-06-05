@@ -1,4 +1,4 @@
-package com.nirbhayram.org.accessingdatamysql.entity;
+package com.nirbhayram.org.accessingdatamysql.entity.application;
 
 import org.springframework.data.repository.CrudRepository;
 

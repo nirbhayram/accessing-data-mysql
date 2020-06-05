@@ -1,6 +1,6 @@
-package com.nirbhayram.org.accessingdatamysql.dao;
+package com.nirbhayram.org.accessingdatamysql.dao.application;
 
-import com.nirbhayram.org.accessingdatamysql.entity.Application;
+import com.nirbhayram.org.accessingdatamysql.entity.application.Application;
 
 public interface IApplicationDao {
 
