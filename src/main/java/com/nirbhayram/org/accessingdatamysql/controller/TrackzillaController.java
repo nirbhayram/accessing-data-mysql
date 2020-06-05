@@ -1,4 +1,4 @@
-package com.nirbhayram.org.accessingdatamysql;
+package com.nirbhayram.org.accessingdatamysql.controller;
 
 import com.nirbhayram.org.accessingdatamysql.entity.Application;
 import com.nirbhayram.org.accessingdatamysql.service.IApplicationService;
@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping(path = "/tza")
-public class Controller {
+public class TrackzillaController {
 
     @Autowired
     private IApplicationService applicationService;
