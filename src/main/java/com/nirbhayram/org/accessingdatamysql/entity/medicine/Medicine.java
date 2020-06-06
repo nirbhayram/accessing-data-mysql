@@ -9,7 +9,7 @@ public class Medicine {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(length = 20,name = "medicine_name")
+    @Column(length = 20,name = "medicine_name",unique = true,nullable = false)
     private String medicineName;
 
     @Column(length = 200)
