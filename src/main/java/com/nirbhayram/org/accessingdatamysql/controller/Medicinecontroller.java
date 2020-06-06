@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/medicine")
@@ -27,6 +26,21 @@ public class Medicinecontroller {
             HttpHeaders headers = new HttpHeaders();
             return new ResponseEntity<>(headers, HttpStatus.CONFLICT);
         }
+    }
+
+    @GetMapping
+    public Medicine getMedicine(@RequestParam String name){
+        return medicineService.getMedicineByName(name);
+    }
+
+    @GetMapping
+    public Medicine getMedicineById(@RequestParam int id){
+        return medicineService.getMedicineById(id);
+    }
+
+    @GetMapping
+    public List<Medicine> getAllMedicine(){
+        return medicineService.getAllMedicine();
     }
 
 }
