@@ -7,14 +7,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class MedicineService implements IMedcineService{
+public class MedicineService implements IMedicineService {
 
     @Autowired
     private IMedicineDao medicineDao;
 
     @Override
-    public void addMedicine(Medicine medicine) {
-        medicineDao.addMedicine(medicine);
+    public boolean addMedicine(Medicine medicine) {
+        if (null == medicineDao.getMedicineByName(medicine.getMedicineName())) {
+            medicineDao.addMedicine(medicine);
+            return true;
+        }
+        return false;
     }
 
     @Override
