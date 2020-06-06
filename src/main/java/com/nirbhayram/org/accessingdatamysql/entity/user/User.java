@@ -15,7 +15,7 @@ public class User {
   @Column(length = 100)
   private String name;
 
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private Date dateOfBirth;
 
   @Column(length = 15)
