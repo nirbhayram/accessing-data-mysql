@@ -1,9 +1,10 @@
 package com.nirbhayram.org.accessingdatamysql.entity.user;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
+import java.util.Date;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 public class User {
 
   @Id
@@ -11,47 +12,26 @@ public class User {
   @Column(name = "userid")
   private Integer id;
 
-  @Column(name = "lastname")
-  private String lastName;
+  @Column(length = 100)
+  private String name;
 
-  @Column(name = "firstname")
-  private String firstName;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+  private Date dateOfBirth;
 
-  @Column(name = "email")
-  private String email;
+  @Column(length = 15)
+  private String mobile;
 
+  @Column(length = 20)
+  private String place;
 
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public User(Integer id, String lastName, String firstName, String email) {
-    this.id = id;
-    this.lastName = lastName;
-    this.firstName = firstName;
-    this.email = email;
-  }
-
-  public User(String lastName, String firstName, String email) {
-    this.lastName = lastName;
-    this.firstName = firstName;
-    this.email = email;
+  public User(String name, Date dateOfBirth, String mobile, String place) {
+    this.name = name;
+    this.dateOfBirth = dateOfBirth;
+    this.mobile = mobile;
+    this.place = place;
   }
 
   public User() {
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
   }
 
   public Integer getId() {
@@ -62,11 +42,35 @@ public class User {
     this.id = id;
   }
 
-  public String getEmail() {
-    return email;
+  public String getName() {
+    return name;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Date getDateOfBirth() {
+    return dateOfBirth;
+  }
+
+  public void setDateOfBirth(Date dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+  }
+
+  public String getMobile() {
+    return mobile;
+  }
+
+  public void setMobile(String mobile) {
+    this.mobile = mobile;
+  }
+
+  public String getPlace() {
+    return place;
+  }
+
+  public void setPlace(String place) {
+    this.place = place;
   }
 }
