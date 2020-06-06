@@ -28,19 +28,34 @@ public class Medicinecontroller {
         }
     }
 
-    @GetMapping
-    public Medicine getMedicine(@RequestParam String name){
-        return medicineService.getMedicineByName(name);
+    @GetMapping(path = "/name")
+    public ResponseEntity<Medicine> getMedicineByName(@RequestParam String name){
+        Medicine medicine = medicineService.getMedicineByName(name);
+        if (null==medicine){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<Medicine>(medicine,HttpStatus.FOUND);
+        }
+    }
+
+    @GetMapping(path = "/id")
+    public ResponseEntity<Medicine> getMedicineById(@RequestParam int id){
+        Medicine medicine = medicineService.getMedicineById(id);
+        if (null==medicine){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<Medicine>(medicine,HttpStatus.FOUND);
+        }
     }
 
     @GetMapping
-    public Medicine getMedicineById(@RequestParam int id){
-        return medicineService.getMedicineById(id);
-    }
-
-    @GetMapping
-    public List<Medicine> getAllMedicine(){
-        return medicineService.getAllMedicine();
+    public ResponseEntity<List<Medicine>> getAllMedicine(){
+        List<Medicine> medicineList = medicineService.getAllMedicine();
+        if (null==medicineList || medicineList.size()==0){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<List<Medicine>>(medicineList,HttpStatus.FOUND);
+        }
     }
 
 }
