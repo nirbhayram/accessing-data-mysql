@@ -5,9 +5,8 @@ import javax.persistence.*;
 @Entity
 public class Medicine {
     @Id
-    @Column(name = "medicine_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer medicineId;
 
     @Column(length = 20,name = "medicine_name",unique = true,nullable = false)
     private String medicineName;
@@ -23,12 +22,12 @@ public class Medicine {
     public Medicine() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getMedicineId() {
+        return medicineId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setMedicineId(Integer medicineId) {
+        this.medicineId = medicineId;
     }
 
     public String getMedicineName() {
@@ -56,6 +55,13 @@ public class Medicine {
     }
 
     public Medicine(String medicineName, String discription, String reason) {
+        this.medicineName = medicineName;
+        this.discription = discription;
+        this.reason = reason;
+    }
+
+    public Medicine(Integer medicineId, String medicineName, String discription, String reason) {
+        this.medicineId = medicineId;
         this.medicineName = medicineName;
         this.discription = discription;
         this.reason = reason;

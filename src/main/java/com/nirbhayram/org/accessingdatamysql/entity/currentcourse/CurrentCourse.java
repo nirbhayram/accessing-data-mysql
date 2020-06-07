@@ -1,19 +1,17 @@
 package com.nirbhayram.org.accessingdatamysql.entity.currentcourse;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.nirbhayram.org.accessingdatamysql.entity.medicine.Medicine;
+import com.nirbhayram.org.accessingdatamysql.entity.user.User;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@IdClass(CurrentCourseID.class)
 public class CurrentCourse implements Serializable {
 
-    @Id
+    @EmbeddedId
     private CurrentCourseID currentCourseID;
 
     private int dailyConsuption;
@@ -23,17 +21,6 @@ public class CurrentCourse implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date startedDate;
 
-
-    public CurrentCourse() {
-    }
-
-    public CurrentCourse(CurrentCourseID currentCourseID, int dailyConsuption, int remainingTablets, Date startedDate) {
-        this.currentCourseID = currentCourseID;
-        this.dailyConsuption = dailyConsuption;
-        this.remainingTablets = remainingTablets;
-        this.startedDate = startedDate;
-    }
-
     public CurrentCourseID getCurrentCourseID() {
         return currentCourseID;
     }
@@ -41,6 +28,10 @@ public class CurrentCourse implements Serializable {
     public void setCurrentCourseID(CurrentCourseID currentCourseID) {
         this.currentCourseID = currentCourseID;
     }
+
+    public CurrentCourse() {
+    }
+
 
     public int getDailyConsuption() {
         return dailyConsuption;

@@ -9,44 +9,46 @@ import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
-
+@Embeddable
 public class CurrentCourseID implements Serializable {
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "userid")
-    private int userId;
+    @JoinColumn
+    private User user;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "medicine_id")
-    private int medicineId;
+    @JoinColumn
+    private Medicine medicine;
 
     public CurrentCourseID() {
+
     }
 
-    public CurrentCourseID(Integer userId, Integer medicineId) {
-        this.userId = userId;
-        this.medicineId = medicineId;
+
+    public CurrentCourseID(User user, Medicine medicine) {
+        this.user = user;
+        this.medicine = medicine;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getMedicineId() {
-        return medicineId;
+    public Medicine getMedicine() {
+        return medicine;
     }
 
-    public void setMedicineId(Integer medicineId) {
-        this.medicineId = medicineId;
+    public void setMedicine(Medicine medicine) {
+        this.medicine = medicine;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId,medicineId);
+        return Objects.hash(this.getUser().getUserId(),this.getMedicine().getMedicineId());
     }
 
     @Override
@@ -55,7 +57,7 @@ public class CurrentCourseID implements Serializable {
             return true;
         if (o == null || getClass() != o.getClass()) return false;
         CurrentCourseID currentCourseId = (CurrentCourseID)o;
-        return (currentCourseId.getUserId()==this.getUserId() &&
-                currentCourseId.getMedicineId()==this.getMedicineId());
+        return currentCourseId.getUser().getUserId()==this.getUser().getUserId() &&
+                currentCourseId.getMedicine().getMedicineId()==this.getMedicine().getMedicineId();
     }
 }

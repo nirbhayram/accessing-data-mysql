@@ -2,12 +2,12 @@ package com.nirbhayram.org.accessingdatamysql.controller;
 
 import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentCourse;
 import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentCourseID;
+import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentcourseRepository;
 import com.nirbhayram.org.accessingdatamysql.entity.medicine.Medicine;
 import com.nirbhayram.org.accessingdatamysql.entity.user.User;
-import com.nirbhayram.org.accessingdatamysql.pojo.CurrentCourseRequest;
-import com.nirbhayram.org.accessingdatamysql.service.currentcourse.ICurrentCourseService;
-import com.nirbhayram.org.accessingdatamysql.service.medicine.IMedicineService;
-import com.nirbhayram.org.accessingdatamysql.service.user.IUserService;
+import com.nirbhayram.org.accessingdatamysql.requestmapping.CurrentCourseRequest;
+import com.nirbhayram.org.accessingdatamysql.service.medicine.MedicineService;
+import com.nirbhayram.org.accessingdatamysql.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,36 +21,36 @@ import org.springframework.web.bind.annotation.RestController;
 public class CurrentCourseController {
 
     @Autowired
-    private ICurrentCourseService currentCourseService;
+    private CurrentcourseRepository currentcourseRepository;
 
     @Autowired
-    private IMedicineService medicineService;
+    private UserService userService;
 
     @Autowired
-    private IUserService userService;
+    private MedicineService medicineService;
 
     @PostMapping
     public ResponseEntity<String> addCurrentCourse(@RequestBody CurrentCourseRequest currentCourseRequest) {
-        System.out.println(currentCourseRequest.getUserid() + "***********");
-        User user = userService.getUserById(currentCourseRequest.getUserid());
-        if (null == user) {
-            return new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND);
+//        System.out.println(currentCourseRequest.getUserId() + " " +
+//                currentCourseRequest.getMedicineId() + " " +
+//                currentCourseRequest.getStartedDate()+" "+
+//                currentCourseRequest.getDailyConsuption()+" "+
+//                currentCourseRequest.getRemainingTablets());
+        CurrentCourseID currentCourseID = new CurrentCourseID();
+        User user = userService.getUserById(currentCourseRequest.getUserId());
+        Medicine medicine = medicineService.getMedicineById(currentCourseRequest.getMedicineId());
+        if (null==user || null==medicine){
+            return new ResponseEntity<String>("No user or medicine found",HttpStatus.NOT_FOUND);
         }
-        Medicine medicine = medicineService.getMedicineById(currentCourseRequest.getMedicineid());
-        if (null == medicine) {
-            return new ResponseEntity<>("Medicine not found", HttpStatus.NOT_FOUND);
-        }
+        currentCourseID.setUser(user);
+        currentCourseID.setMedicine(medicine);
         CurrentCourse currentCourse = new CurrentCourse();
-        CurrentCourseID currentCourseID = new CurrentCourseID(user.getId(),medicine.getId());
         currentCourse.setCurrentCourseID(currentCourseID);
-        currentCourse.setRemainingTablets(currentCourseRequest.getRemainingTablets());
         currentCourse.setDailyConsuption(currentCourseRequest.getDailyConsuption());
-        boolean isCurrentCourseAdded = currentCourseService.addCurrentCourse(currentCourse);
-        if (isCurrentCourseAdded) {
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
+        currentCourse.setRemainingTablets(currentCourseRequest.getRemainingTablets());
+        currentCourse.setStartedDate(currentCourseRequest.getStartedDate());
+        currentcourseRepository.save(currentCourse);
+        return new ResponseEntity<String>(HttpStatus.CREATED);
     }
 
 }
