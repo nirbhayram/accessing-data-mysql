@@ -1,30 +1,60 @@
 package com.nirbhayram.org.accessingdatamysql.service.user;
 
+import com.nirbhayram.org.accessingdatamysql.constant.Constant;
 import com.nirbhayram.org.accessingdatamysql.dao.user.IUserDao;
 import com.nirbhayram.org.accessingdatamysql.entity.user.User;
+import com.nirbhayram.org.accessingdatamysql.requestmapping.UserRequest;
+import com.nirbhayram.org.accessingdatamysql.utils.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     @Autowired
     IUserDao userDao;
 
     @Override
-    public void addUser(User user) {
+    public ResponseEntity<String> addUser(UserRequest userRequest) {
+        User user = checkUserRequest(userRequest);
         userDao.addUser(user);
+        return new ResponseEntity<String>("User created", HttpStatus.CREATED);
     }
 
     @Override
-    public User getUserById(int id) {
-        return userDao.findUserById(id);
+    public ResponseEntity<List<User>> getUser(Map<Object, Object> map) {
+        int userId = RequestUtil.checkUserId(map);
+        if (userId == Constant.DEFAULT_FALSE_INT) {
+            return new ResponseEntity<List<User>>(userDao.getAllUser(), HttpStatus.FOUND);
+        } else {
+            User user = userDao.findUserById(userId);
+            if (null == user) {
+                return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
+            } else {
+                List<User> list = new ArrayList<User>();
+                list.add(user);
+                return new ResponseEntity<List<User>>(list, HttpStatus.FOUND);
+            }
+        }
     }
 
     @Override
-    public List<User> getAllUser() {
-        return userDao.getAllUser();
+    public User getUserById(int userId) {
+        return userDao.findUserById(userId);
+    }
+
+    private User checkUserRequest(UserRequest userRequest) {
+        User user = new User();
+        user.setDateOfBirth(userRequest.getDateOfBirth());
+        user.setMobile(userRequest.getMobile());
+        user.setName(userRequest.getName());
+        user.setPlace(userRequest.getPlace());
+        return user;
     }
 }

@@ -30,6 +30,9 @@ public class CurrentCourseDao implements ICurrentCourseDao {
     @Override
     public CurrentCourse getCurrentCourseById(CurrentCourseID currentCourseID) {
         Optional<CurrentCourse> optionalCurrentCourse = currentcourseRepository.findById(currentCourseID);
+        if (optionalCurrentCourse.isEmpty()){
+            return null;
+        }
         return optionalCurrentCourse.get();
     }
 

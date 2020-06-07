@@ -1,5 +1,6 @@
 package com.nirbhayram.org.accessingdatamysql.service.currentcourse;
 
+import com.nirbhayram.org.accessingdatamysql.constant.Constant;
 import com.nirbhayram.org.accessingdatamysql.dao.currentcourse.ICurrentCourseDao;
 import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentCourse;
 import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentCourseID;
@@ -8,6 +9,7 @@ import com.nirbhayram.org.accessingdatamysql.entity.user.User;
 import com.nirbhayram.org.accessingdatamysql.requestmapping.CurrentCourseRequest;
 import com.nirbhayram.org.accessingdatamysql.service.medicine.IMedicineService;
 import com.nirbhayram.org.accessingdatamysql.service.user.IUserService;
+import com.nirbhayram.org.accessingdatamysql.utils.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +21,6 @@ import java.util.Map;
 
 @Service
 public class CurrentCourseService implements ICurrentCourseService {
-
-    public static final int DEFAULT_FALSE = -789;
 
     @Autowired
     private ICurrentCourseDao currentCourseDao;
@@ -114,48 +114,22 @@ public class CurrentCourseService implements ICurrentCourseService {
 
     @Override
     public ResponseEntity<List<CurrentCourse>> serveGetRequest(Map<Object, Object> map) {
-        int userId = checkUserId(map);
-        int medicineId = checkMedicineId(map);
-        if (userId == DEFAULT_FALSE) {
-            if (medicineId == DEFAULT_FALSE) {
+        int userId = RequestUtil.checkUserId(map);
+        int medicineId = RequestUtil.checkMedicineId(map);
+        if (userId == Constant.DEFAULT_FALSE_INT) {
+            if (medicineId == Constant.DEFAULT_FALSE_INT) {
                 return this.getAllCurrentCourse();
             } else {
                 return this.getCurrentCourseByMedicineId(medicineId);
             }
         } else {
-            if (medicineId == DEFAULT_FALSE) {
+            if (medicineId == Constant.DEFAULT_FALSE_INT) {
                 return this.getCurrentCourseByUserId(userId);
             } else {
                 ResponseEntity<CurrentCourse> responseEntity = this.getCurrentCourseByUserIdAndMedicineId(userId, medicineId);
                 List<CurrentCourse> list = new ArrayList<CurrentCourse>();
                 list.add(responseEntity.getBody());
                 return new ResponseEntity<List<CurrentCourse>>(list, HttpStatus.FOUND);
-            }
-        }
-    }
-
-    private int checkUserId(Map<Object, Object> map) {
-        Object userIdObject = map.get("userId");
-        if (null == userIdObject) {
-            return DEFAULT_FALSE;
-        } else {
-            try {
-                return Integer.parseInt(userIdObject.toString());
-            } catch (Exception e) {
-                return DEFAULT_FALSE;
-            }
-        }
-    }
-
-    private int checkMedicineId(Map<Object, Object> map) {
-        Object medicineId = map.get("medicineId");
-        if (null == medicineId) {
-            return DEFAULT_FALSE;
-        } else {
-            try {
-                return Integer.parseInt(medicineId.toString());
-            } catch (Exception e) {
-                return DEFAULT_FALSE;
             }
         }
     }

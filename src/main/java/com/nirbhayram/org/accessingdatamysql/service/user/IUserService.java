@@ -1,11 +1,16 @@
 package com.nirbhayram.org.accessingdatamysql.service.user;
 
 import com.nirbhayram.org.accessingdatamysql.entity.user.User;
+import com.nirbhayram.org.accessingdatamysql.requestmapping.UserRequest;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IUserService {
-    void addUser(User user);
-    User getUserById(int id);
-    List<User> getAllUser();
+    ResponseEntity<String> addUser(UserRequest userRequest);
+
+    ResponseEntity<List<User>> getUser(Map<Object, Object> id);
+
+    User getUserById(int userId);
 }
