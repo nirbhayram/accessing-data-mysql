@@ -3,27 +3,50 @@ package com.nirbhayram.org.accessingdatamysql.entity.currentcourse;
 import com.nirbhayram.org.accessingdatamysql.entity.medicine.Medicine;
 import com.nirbhayram.org.accessingdatamysql.entity.user.User;
 
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
+
 public class CurrentCourseID implements Serializable {
 
-    private User user;
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "userid")
+    private int userId;
 
-    private Medicine medicine;
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "medicine_id")
+    private int medicineId;
 
     public CurrentCourseID() {
-
     }
 
-    public CurrentCourseID(User user, Medicine medicine) {
-        this.user = user;
-        this.medicine = medicine;
+    public CurrentCourseID(Integer userId, Integer medicineId) {
+        this.userId = userId;
+        this.medicineId = medicineId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getMedicineId() {
+        return medicineId;
+    }
+
+    public void setMedicineId(Integer medicineId) {
+        this.medicineId = medicineId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user.getId(),medicine.getId());
+        return Objects.hash(userId,medicineId);
     }
 
     @Override
@@ -32,7 +55,7 @@ public class CurrentCourseID implements Serializable {
             return true;
         if (o == null || getClass() != o.getClass()) return false;
         CurrentCourseID currentCourseId = (CurrentCourseID)o;
-        return currentCourseId.user.getId()==this.user.getId() &&
-                currentCourseId.medicine.getId()==this.medicine.getId();
+        return (currentCourseId.getUserId()==this.getUserId() &&
+                currentCourseId.getMedicineId()==this.getMedicineId());
     }
 }
