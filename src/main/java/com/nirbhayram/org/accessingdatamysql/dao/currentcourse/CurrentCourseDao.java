@@ -6,6 +6,9 @@ import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentcourseR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -15,46 +18,49 @@ public class CurrentCourseDao implements ICurrentCourseDao {
     private CurrentcourseRepository currentcourseRepository;
 
     @Override
-    public boolean addCurrentCourse(CurrentCourse currentCourse) {
-        if (null != checkIfCurrentCourseExists(currentCourse.getCurrentCourseID().getUserId(), currentCourse.getCurrentCourseID().getMedicineId())) {
-            currentcourseRepository.save(currentCourse);
-            return true;
-        }
-        return false;
+    public void addCurrentCourse(CurrentCourse currentCourse) {
+        currentcourseRepository.save(currentCourse);
     }
 
     @Override
-    public CurrentCourse checkIfCurrentCourseExists(int userId, int medicineId) {
-        Optional<CurrentCourse> optionalCurrentCourse = currentcourseRepository.findById(new CurrentCourseID(userId, medicineId));
-        if (optionalCurrentCourse.isEmpty()) {
-            return null;
-        }
+    public void updateCurrentCourse(CurrentCourse currentCourse) {
+        currentcourseRepository.save(currentCourse);
+    }
+
+    @Override
+    public CurrentCourse getCurrentCourseById(CurrentCourseID currentCourseID) {
+        Optional<CurrentCourse> optionalCurrentCourse = currentcourseRepository.findById(currentCourseID);
         return optionalCurrentCourse.get();
     }
 
     @Override
-    public boolean updateCurrentCourse(CurrentCourse currentCourse) {
-        Optional<CurrentCourse> optionalCurrentCourse = currentcourseRepository.findById(new CurrentCourseID(currentCourse.getCurrentCourseID().getUserId(), currentCourse.getCurrentCourseID().getMedicineId()));
-        if (optionalCurrentCourse.isEmpty()) {
-            return false;
-        }
-        CurrentCourse currentCourse1 = optionalCurrentCourse.get();
-//        currentCourse1.getCurrentCourseID().setUserId(currentCourse.getCurrentCourseID().getUserId());
-//        currentCourse1.getCurrentCourseID().setMedicineId(currentCourse.getCurrentCourseID().getMedicineId());
-        currentCourse1.setDailyConsuption(currentCourse.getDailyConsuption());
-        currentCourse1.setRemainingTablets(currentCourse.getRemainingTablets());
-        currentcourseRepository.save(currentCourse1);
-        return true;
+    public void deleteCurrentCourse(CurrentCourse currentCourse) {
+        currentcourseRepository.delete(currentCourse);
     }
 
     @Override
-    public boolean deleteCurrentCourse(CurrentCourse currentCourse) {
-//        Optional<CurrentCourse> optionalCurrentCourse = currentcourseRepository.findById(new CurrentCourseID(currentCourse.getUserId(), currentCourse.getMedicineId()));
-//        if (optionalCurrentCourse.isEmpty()) {
-//            return false;
-//        }
-//        currentcourseRepository.delete(optionalCurrentCourse.get());
-//        return true;
-        return false;
+    public List<CurrentCourse> getAllCurrentCourse() {
+        Iterable<CurrentCourse> currentCourseIterable = currentcourseRepository.findAll();
+        Iterator<CurrentCourse> currentCourseIterator = currentCourseIterable.iterator();
+        List<CurrentCourse> list = new ArrayList<CurrentCourse>();
+        while (currentCourseIterator.hasNext()){
+            list.add(currentCourseIterator.next());
+        }
+        return list;
+    }
+
+    @Override
+    public List<CurrentCourse> getAllCurrentCourseOfUser(int userId) {
+        return currentcourseRepository.findByCurrentCourseIDUserUserId(userId);
+    }
+
+    @Override
+    public List<CurrentCourse> getAllCurrentCourseOfMedicine(int medicineId) {
+        return currentcourseRepository.findByCurrentCourseIDMedicineMedicineId(medicineId);
+    }
+
+    @Override
+    public CurrentCourse getCurrentCourseOfUserAndMedicine(int userId, int medicineId) {
+        return currentcourseRepository.findByCurrentCourseIDUserUserIdAndCurrentCourseIDMedicineMedicineId(userId,medicineId);
     }
 }
