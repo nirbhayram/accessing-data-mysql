@@ -30,6 +30,6 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<String> updateUser(@RequestBody UserRequest userRequest,@RequestParam Map<Object, Object> map){
-        return null;
+        return userService.updateUser(userRequest,map);
     }
 }
