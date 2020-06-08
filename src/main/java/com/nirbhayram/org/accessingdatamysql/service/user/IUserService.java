@@ -13,4 +13,6 @@ public interface IUserService {
     ResponseEntity<List<User>> getUser(Map<Object, Object> id);
 
     User getUserById(int userId);
+
+    ResponseEntity<String> updateUser(UserRequest userRequest, Map<Object, Object> map);
 }

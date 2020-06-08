@@ -27,4 +27,9 @@ public class UserController {
     public ResponseEntity<List<User>> getUserById(@RequestParam Map<Object, Object> map) {
         return userService.getUser(map);
     }
+
+    @PutMapping
+    public ResponseEntity<String> updateUser(@RequestBody UserRequest userRequest,@RequestParam Map<Object, Object> map){
+        return null;
+    }
 }
