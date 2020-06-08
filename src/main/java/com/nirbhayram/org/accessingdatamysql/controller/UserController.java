@@ -2,7 +2,7 @@ package com.nirbhayram.org.accessingdatamysql.controller;
 
 
 import com.nirbhayram.org.accessingdatamysql.entity.user.User;
-import com.nirbhayram.org.accessingdatamysql.requestmapping.UserRequest;
+import com.nirbhayram.org.accessingdatamysql.request_mapping.UserRequest;
 import com.nirbhayram.org.accessingdatamysql.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

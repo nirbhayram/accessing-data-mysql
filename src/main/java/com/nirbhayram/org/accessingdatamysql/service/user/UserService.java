@@ -3,7 +3,7 @@ package com.nirbhayram.org.accessingdatamysql.service.user;
 import com.nirbhayram.org.accessingdatamysql.constant.Constant;
 import com.nirbhayram.org.accessingdatamysql.dao.user.IUserDao;
 import com.nirbhayram.org.accessingdatamysql.entity.user.User;
-import com.nirbhayram.org.accessingdatamysql.requestmapping.UserRequest;
+import com.nirbhayram.org.accessingdatamysql.request_mapping.UserRequest;
 import com.nirbhayram.org.accessingdatamysql.utils.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

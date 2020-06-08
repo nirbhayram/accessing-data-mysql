@@ -1,7 +1,7 @@
 package com.nirbhayram.org.accessingdatamysql.controller;
 
 import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentCourse;
-import com.nirbhayram.org.accessingdatamysql.requestmapping.CurrentCourseRequest;
+import com.nirbhayram.org.accessingdatamysql.request_mapping.CurrentCourseRequest;
 import com.nirbhayram.org.accessingdatamysql.service.currentcourse.ICurrentCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

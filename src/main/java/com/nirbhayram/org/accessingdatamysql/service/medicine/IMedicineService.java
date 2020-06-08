@@ -1,7 +1,7 @@
 package com.nirbhayram.org.accessingdatamysql.service.medicine;
 
 import com.nirbhayram.org.accessingdatamysql.entity.medicine.Medicine;
-import com.nirbhayram.org.accessingdatamysql.requestmapping.MedicineRequest;
+import com.nirbhayram.org.accessingdatamysql.request_mapping.MedicineRequest;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

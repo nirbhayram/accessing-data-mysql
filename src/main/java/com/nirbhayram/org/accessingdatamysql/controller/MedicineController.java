@@ -1,12 +1,9 @@
 package com.nirbhayram.org.accessingdatamysql.controller;
 
 import com.nirbhayram.org.accessingdatamysql.entity.medicine.Medicine;
-import com.nirbhayram.org.accessingdatamysql.entity.medicine.MedicineRepository;
-import com.nirbhayram.org.accessingdatamysql.requestmapping.MedicineRequest;
+import com.nirbhayram.org.accessingdatamysql.request_mapping.MedicineRequest;
 import com.nirbhayram.org.accessingdatamysql.service.medicine.IMedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

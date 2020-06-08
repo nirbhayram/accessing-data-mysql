@@ -6,7 +6,7 @@ import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentCourse;
 import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentCourseID;
 import com.nirbhayram.org.accessingdatamysql.entity.medicine.Medicine;
 import com.nirbhayram.org.accessingdatamysql.entity.user.User;
-import com.nirbhayram.org.accessingdatamysql.requestmapping.CurrentCourseRequest;
+import com.nirbhayram.org.accessingdatamysql.request_mapping.CurrentCourseRequest;
 import com.nirbhayram.org.accessingdatamysql.service.medicine.IMedicineService;
 import com.nirbhayram.org.accessingdatamysql.service.user.IUserService;
 import com.nirbhayram.org.accessingdatamysql.utils.RequestUtil;

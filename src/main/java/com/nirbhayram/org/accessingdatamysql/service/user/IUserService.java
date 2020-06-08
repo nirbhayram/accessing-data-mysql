@@ -1,7 +1,7 @@
 package com.nirbhayram.org.accessingdatamysql.service.user;
 
 import com.nirbhayram.org.accessingdatamysql.entity.user.User;
-import com.nirbhayram.org.accessingdatamysql.requestmapping.UserRequest;
+import com.nirbhayram.org.accessingdatamysql.request_mapping.UserRequest;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.nirbhayram.org.accessingdatamysql.requestmapping;
+package com.nirbhayram.org.accessingdatamysql.request_mapping;
 
 public class MedicineRequest {
 

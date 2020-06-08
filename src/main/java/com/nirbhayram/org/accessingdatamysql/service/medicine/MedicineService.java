@@ -3,7 +3,7 @@ package com.nirbhayram.org.accessingdatamysql.service.medicine;
 import com.nirbhayram.org.accessingdatamysql.constant.Constant;
 import com.nirbhayram.org.accessingdatamysql.dao.medicine.IMedicineDao;
 import com.nirbhayram.org.accessingdatamysql.entity.medicine.Medicine;
-import com.nirbhayram.org.accessingdatamysql.requestmapping.MedicineRequest;
+import com.nirbhayram.org.accessingdatamysql.request_mapping.MedicineRequest;
 import com.nirbhayram.org.accessingdatamysql.utils.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
