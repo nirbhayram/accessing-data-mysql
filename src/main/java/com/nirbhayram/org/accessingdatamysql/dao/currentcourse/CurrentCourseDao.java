@@ -30,7 +30,7 @@ public class CurrentCourseDao implements ICurrentCourseDao {
     @Override
     public CurrentCourse getCurrentCourseById(CurrentCourseID currentCourseID) {
         Optional<CurrentCourse> optionalCurrentCourse = currentcourseRepository.findById(currentCourseID);
-        if (optionalCurrentCourse.isEmpty()){
+        if (optionalCurrentCourse.isEmpty()) {
             return null;
         }
         return optionalCurrentCourse.get();
@@ -46,7 +46,7 @@ public class CurrentCourseDao implements ICurrentCourseDao {
         Iterable<CurrentCourse> currentCourseIterable = currentcourseRepository.findAll();
         Iterator<CurrentCourse> currentCourseIterator = currentCourseIterable.iterator();
         List<CurrentCourse> list = new ArrayList<CurrentCourse>();
-        while (currentCourseIterator.hasNext()){
+        while (currentCourseIterator.hasNext()) {
             list.add(currentCourseIterator.next());
         }
         return list;
@@ -64,6 +64,6 @@ public class CurrentCourseDao implements ICurrentCourseDao {
 
     @Override
     public CurrentCourse getCurrentCourseOfUserAndMedicine(int userId, int medicineId) {
-        return currentcourseRepository.findByCurrentCourseIDUserUserIdAndCurrentCourseIDMedicineMedicineId(userId,medicineId);
+        return currentcourseRepository.findByCurrentCourseIDUserUserIdAndCurrentCourseIDMedicineMedicineId(userId, medicineId);
     }
 }

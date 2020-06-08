@@ -32,4 +32,12 @@ public class RequestUtil {
         }
     }
 
+    public static String checkMedicineName(Map<Object, Object> map) {
+        Object medicineName = map.get(Constant.medicineName);
+        if (null == medicineName) {
+            return Constant.DEFAULT_NULL_STRING;
+        } else {
+            return medicineName.toString();
+        }
+    }
 }

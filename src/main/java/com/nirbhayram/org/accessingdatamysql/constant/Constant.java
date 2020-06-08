@@ -13,4 +13,7 @@ public class Constant {
     public static final String userId = "userId";
 
     public static final String medicineId = "medicineId";
+
+    public static final String medicineName = "medicineName";
+    public static final String DEFAULT_NULL_STRING = "null";
 }

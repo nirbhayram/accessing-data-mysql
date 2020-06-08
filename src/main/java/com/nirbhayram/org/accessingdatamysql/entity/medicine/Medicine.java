@@ -8,15 +8,13 @@ public class Medicine {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer medicineId;
 
-    @Column(length = 20,name = "medicine_name",unique = true,nullable = false)
+    @Column(length = 100,name = "medicine_name",unique = true,nullable = false)
     private String medicineName;
 
-    @Column(length = 200)
     private String discription;
 
     //TODO storing image into relational database;
 
-    @Column(length = 20)
     private String reason;
 
     public Medicine() {
