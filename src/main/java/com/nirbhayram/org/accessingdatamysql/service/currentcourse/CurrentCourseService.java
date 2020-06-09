@@ -69,7 +69,12 @@ public class CurrentCourseService implements ICurrentCourseService {
 
     @Override
     public ResponseEntity<String> deleteCurrentCourse(CurrentCourseRequest currentCourseRequest) {
-        return null;
+        CurrentCourse currentCourse = currentCourseDao.getCurrentCourseOfUserAndMedicine(currentCourseRequest.getUserId(), currentCourseRequest.getMedicineId());
+        if (null == currentCourse) {
+            return new ResponseEntity<String>("No current course found.", HttpStatus.NOT_FOUND);
+        }
+        currentCourseDao.deleteCurrentCourse(currentCourse);
+        return new ResponseEntity<String>("Deleted current course", HttpStatus.FOUND);
     }
 
     @Override

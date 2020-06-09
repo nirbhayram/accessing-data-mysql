@@ -32,4 +32,9 @@ public class CurrentCourseController {
         return currentCourseService.addCurrentCourse(currentCourseRequest);
     }
 
+    @DeleteMapping
+    public ResponseEntity<String> deleteCurrentCourse(@RequestBody CurrentCourseRequest currentCourseRequest) {
+        return currentCourseService.deleteCurrentCourse(currentCourseRequest);
+    }
+
 }

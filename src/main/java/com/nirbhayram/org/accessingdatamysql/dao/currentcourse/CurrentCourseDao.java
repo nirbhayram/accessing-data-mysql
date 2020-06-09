@@ -1,21 +1,24 @@
 package com.nirbhayram.org.accessingdatamysql.dao.currentcourse;
 
+import com.nirbhayram.org.accessingdatamysql.dao.previouscourse.IPreviousCourseDao;
 import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentCourse;
 import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentCourseID;
 import com.nirbhayram.org.accessingdatamysql.entity.currentcourse.CurrentcourseRepository;
+import com.nirbhayram.org.accessingdatamysql.entity.previouscourse.PreviousCourse;
+import com.nirbhayram.org.accessingdatamysql.entity.previouscourse.PreviousCourseID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 public class CurrentCourseDao implements ICurrentCourseDao {
 
     @Autowired
     private CurrentcourseRepository currentcourseRepository;
+
+    @Autowired
+    private IPreviousCourseDao previousCourseDao;
 
     @Override
     public void addCurrentCourse(CurrentCourse currentCourse) {
@@ -38,6 +41,8 @@ public class CurrentCourseDao implements ICurrentCourseDao {
 
     @Override
     public void deleteCurrentCourse(CurrentCourse currentCourse) {
+        PreviousCourse previousCourse = deleteCurrentCourseAndCreatePreviousCourse(currentCourse);
+        previousCourseDao.addPreviousCourse(previousCourse);
         currentcourseRepository.delete(currentCourse);
     }
 
@@ -65,5 +70,15 @@ public class CurrentCourseDao implements ICurrentCourseDao {
     @Override
     public CurrentCourse getCurrentCourseOfUserAndMedicine(int userId, int medicineId) {
         return currentcourseRepository.findByCurrentCourseIDUserUserIdAndCurrentCourseIDMedicineMedicineId(userId, medicineId);
+    }
+
+    private PreviousCourse deleteCurrentCourseAndCreatePreviousCourse(CurrentCourse currentCourse) {
+        PreviousCourseID previousCourseID = new PreviousCourseID();
+        previousCourseID.setUser(currentCourse.getCurrentCourseID().getUser());
+        previousCourseID.setMedicine(currentCourse.getCurrentCourseID().getMedicine());
+        PreviousCourse previousCourse = new PreviousCourse();
+        previousCourse.setPreviousCourseID(previousCourseID);
+        previousCourse.setDateOfCompletion(new Date());
+        return previousCourse;
     }
 }
