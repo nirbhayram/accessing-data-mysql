@@ -28,6 +28,22 @@ public class PreviousCourseID implements Serializable {
         this.medicine = medicine;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Medicine getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(Medicine medicine) {
+        this.medicine = medicine;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(user.getUserId(), medicine.getMedicineId());

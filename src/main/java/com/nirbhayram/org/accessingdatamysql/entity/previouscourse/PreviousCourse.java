@@ -4,12 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.IdClass;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@IdClass(PreviousCourseID.class)
 public class PreviousCourse implements Serializable {
 
     @EmbeddedId
